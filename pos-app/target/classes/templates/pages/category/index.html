@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Index</title>
+</head>
+<body>
+
+<!-- breadcrumb -->
+<div class="row mb-2" layout:fragment="breadcrumb">
+    <div class="col-sm-6">
+        <h1>Category</h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a th:href="@{~/home}">Home</a></li>
+            <li class="breadcrumb-item active">Home</li>
+        </ol>
+    </div>
+</div>
+<!-- breadcrumb -->
+
+<!-- wajib ada -->
+<div class="container-fluid" layout:fragment="content">
+    <!-- small boxes (stat box) wajib ada -->
+    <div class="row">
+        <!-- wajib ada -->
+        <div class="col-12">
+            <!-- widged -->
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Category</h3>
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px">
+                            <input type="text" name="table_search" class="form-control float-sm-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <a th:href="@{~/category/add-modal}" class="btn btn-info" id="btn-add">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Descriptions</th>
+                            <th>Products</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="category :${listCategory}">
+                            <td th:text="${category.categoryName}"></td>
+                            <td th:text="${category.description}"></td>
+                            <td>
+                                <div th:each="product: ${category.product}">
+                                    Product Name: <strong th:text="${product.productName}"></strong><br>
+                                    Company Name: <strong th:text="${product.supplierName}"></strong><br>
+                                    Quantity : <strong th:text="${product.qtyUnit}"></strong><br>
+                                    Price : <strong th:text="${product.unitPrice}"></strong><br>
+                                    Stock : <strong th:text="${product.unitStock}"></strong><br>
+                                    Order : <strong th:text="${product.unitsOrder}"></strong><br>
+                                    Re Order : <strong th:text="${product.reorderLevel}"></strong><br>
+                                    Discount : <strong th:text="${product.discontinued}"></strong><br>
+                                </div>
+                            </td>
+                            <td>
+                                <a th:href="@{~/category/edit/{id}(id=${category.id})}" class="btn btn-xs btn-outline-warning btn-edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a th:href="@{~/category/detail/{id}(id=${category.id})}" class="btn btn-xs btn-outline-success btn-view">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a th:href="@{~/category/delete/{id}(id=${category.id})}" class="btn btn-xs btn-outline-danger btn-delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- client script -->
+<th:block layout:fragment="script">
+    <script>
+
+        $("#btn-add").click(function (e){
+            // mencegah link bekerja
+            e.preventDefault();
+            // call method getModal
+            getModal($(this));
+        });
+
+        $(".btn-edit").on("click", function (event){
+            // mencegah link bekerja
+            event.preventDefault();
+
+            // call method getModel
+            getModal($(this));
+        })
+
+        $(".btn-view").on("click", function (event){
+            // mencegah link bekerja
+            event.preventDefault();
+
+            // call method getModel
+            getModal($(this));
+        });
+
+        $(".btn-delete").on("click", function (event){
+            // mencegah link bekerja
+            event.preventDefault();
+
+            // call method getModel
+            //getModal($('.btn-delete'));
+            getModal($(this));
+        });
+
+        function getModal(element){
+            // get url
+            var url = $(element).attr('href');
+            // ajax
+            $.ajax({
+                url: url,
+                type : 'GET',
+                dataType : 'HTML',
+                success : function (result){
+                    // replace modal-content
+                    $('.modal-content').html(result);
+                    // menampilkan modal
+                    $('#modal-form').modal('show');
+                }
+            });
+        }
+    </script>
+</th:block>
+</body>
+</html>

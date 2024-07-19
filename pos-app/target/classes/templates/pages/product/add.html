@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer - Add</title>
+</head>
+<body>
+
+<!-- breadcrumb -->
+<div class="row mb-2" layout:fragment="breadcrumb">
+  <div class="col-sm-6">
+    <h1>Category</h1>
+  </div>
+  <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+      <li class="breadcrumb-item"><a th:href="@{~/home}">Home</a></li>
+      <li class="breadcrumb-item"><a th:href="@{~/category}">Category</a></li>
+      <li class="breadcrumb-item active">New</li>
+    </ol>
+  </div>
+</div>
+<!-- /.breadcrumb -->
+
+<!-- wajib ada-->
+<div class="container-fluid" layout:fragment="content">
+  <!-- Small boxes (Stat box) wajib ada-->
+  <div class="row">
+    <!-- wajib ada -->
+    <div class="col-12">
+      <!-- widged -->
+      <div class="card card-success">
+        <div class="card-header">
+          <h3 class="card-title">New Customer Data</h3>
+        </div>
+        <form th:action="@{~/category/save}" method="post" class="form-horizontal">
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="categoryName" class="col-sm-2 col-form-label">Category Name</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="categoryName" name="categoryName">
+                  <option value="">Select One</option>
+                  <option th:each="option :${#lists.sort(dataList,byPosition)}"></option>
+                </select>
+                <!--                <input type="text" class="form-control" name="categoryName" id="categoryName" placeholder="Category Name">-->
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="description" class="col-sm-2 col-form-label">Description</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-outline-success">Save</button>
+            <a th:href="@{~/category}" class="btn btn-default">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

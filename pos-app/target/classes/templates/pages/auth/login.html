@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/login}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!-- /.login-logo -->
+<div layout:fragment="content" class="card card-outline bg-gradient-light">
+  <div class="card-header text-center bg-black">
+    <a th:href="@{~/home}" class="h2">
+      <img th:src="@{~/dist/img/user2-160x160.jpg}" alt="Kampus Siakad Logo" class="brand-image img-thumbnail elevation-3"
+           style="width: 50px">
+      <b>point of sale</b></a>
+  </div>
+  <div class="card-body">
+    <p class="login-box-msg font-weight-bold">masukkan alamat email untuk masuk ke beranda</p>
+
+    <form th:action="@{/login}" method="post">
+      <div class="input-group mb-3">
+        <input type="email" class="form-control btn-outline-light" placeholder="Email" name="username">
+        <div class="input-group-append">
+          <div class="input-group-text bg-gradient-gray">
+            <span class="fas fa-envelope"></span>
+          </div>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <input type="password" class="form-control btn-outline-light" placeholder="Password" name="password">
+        <div class="input-group-append">
+          <div class="input-group-text bg-gradient-gray">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div class="icheck-dark font-weight-bold">
+            <input type="radio" id="remember" name="remember-me">
+            <label for="remember">
+              Remember Me
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-4">
+          <button type="submit" class="btn btn-dark btn-block">Sign In</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.card-body -->
+</div>
+<!-- /.card -->
+</body>
+</html>

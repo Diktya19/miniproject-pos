@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Supplier Index</title>
+</head>
+<body>
+<!-- wajib ada-->
+<div class="container-fluid" layout:fragment="content">
+    <!-- Small boxes (Stat box) wajib ada-->
+    <div class="row">
+        <!-- wajib ada -->
+        <div class="col-12">
+            <!-- widged -->
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Supplier Data</h3>
+
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fas fa-search"></i>
+                                </button>
+
+                                <a th:href="@{~/supplier/add-modal}" class="btn btn-info" id="btn-add">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Contact Name</th>
+                            <th>Contact Title</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Region</th>
+                            <th>Postal Code</th>
+                            <th>Country</th>
+                            <th>Phone</th>
+                            <th>Fax</th>
+                            <th>Home Page</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="supplier :${listSupplier}">
+                            <td th:text="${supplier.companyName}"></td>
+                            <td th:text="${supplier.contactName}"></td>
+                            <td th:text="${supplier.contactTitle}"></td>
+                            <td th:text="${supplier.address}"></td>
+                            <td th:text="${supplier.city}"></td>
+                            <td th:text="${supplier.region}"></td>
+                            <td th:text="${supplier.postalCode}"></td>
+                            <td th:text="${supplier.country}"></td>
+                            <td th:text="${supplier.phone}"></td>
+                            <td th:text="${supplier.fax}"></td>
+                            <td th:text="${supplier.homePage}"></td>
+                            <td>
+                                <a th:href="@{~/supplier/edit/{id}(id=${supplier.id}) }" class="btn btn-xs btn-warning btn-edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a th:href="@{/supplier/detail/{id}(id=${supplier.id}) }" class="btn btn-xs btn-success btn-view">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a th:href="@{/supplier/delete/{id}(id=${supplier.id}) }" class="btn btn-xs btn-danger btn-delete">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    &lt;!&ndash; modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="modal-form">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Default Modal</h4>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <p>One fine body&hellip;</p>-->
+<!--                </div>-->
+<!--                <div class="modal-footer justify-content-between">-->
+<!--                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; /.modal-content &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--    </div>-->
+
+</div>
+
+<!-- client script -->
+<th:block layout:fragment="script">
+    <script>
+        $(function(){
+            $(document).Toasts('create', {
+                class: 'bg-success',
+                title: 'Toast Title',
+                subtitle: 'Subtitle',
+                body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+
+        $("#btn-add").click(function (e){
+            // mencegah link bekerja
+            e.preventDefault();
+            // call get modal
+            getModal($(this));
+        });
+
+        $(".btn-edit").on("click", function (event){
+            // mencegah link bekerja
+            event.preventDefault();
+
+            // call method getModel
+            //getModal($('.btn-edit'));
+            getModal($(this));
+        });
+
+        $(".btn-view").on("click", function (event){
+            // mencegah link bekerja
+            event.preventDefault();
+
+            // call method getModel
+            // getModal($('.btn-view'));
+            getModal($(this));
+        });
+
+        $(".btn-delete").on("click", function (event){
+            // mencegah link bekerja
+            event.preventDefault();
+
+            // call method getModel
+            //getModal($('.btn-delete'));
+            getModal($(this));
+        });
+
+        function getModal(element){
+            // get url
+            var url = $(element).attr('href');
+            // ajax
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'HTML',
+                success: function (result){
+                    // replace modal-content
+                    $('.modal-content').html(result);
+                    // menampilkan modal
+                    $('#modal-form').modal('show');
+                }
+            });
+        }
+    </script>
+</th:block>
+</body>
+</html>

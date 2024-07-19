@@ -1,0 +1,134 @@
+<div class="card card-info">
+    <div class="card-header input-group navbar">
+        <h3 class="card-title fa-pull-left">New Category</h3>
+        <div class="fa-pull-right">
+            <button type="button" class="btn btn-lg" data-dismiss="modal">
+                <i class="fas fa-close">Close</i>
+            </button>
+        </div>
+    </div>
+    <form th:action="@{~/category/save}" method="post" class="form-horizontal">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <!-- card category -->
+                    <div class="form-group row">
+                        <label for="categoryName" class="col-sm-4 col-form-label">Category Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="categoryName" id="categoryName" placeholder="Enter Category">
+                        </div>
+                    </div>
+                </div>
+                <!-- card category -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-4 col-form-label">description</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card product -->
+                <div class="card card-indigo">
+                    <div class="card-header">
+                        <h3 class="card-title">New Product :</h3>
+                        <div class="card-tools">
+                            <a th:href="@{~/category/add-product}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Supplier</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <!-- /. card supplier -->
+                                                <div class="form-group row">
+                                                    <label for="supplierId" class="col-sm-4 col-form-label">Supplier Name</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control custom-select" id="supplierId" name="supplierId" th:name="|product[0].supplierId|">
+                                                            <option value="">Select One</option>
+                                                            <option th:each="supplier :${listSupplier}" th:value="${supplier.id}"
+                                                                    th:text="${supplier.companyName}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- product -->
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label for="productName" class="col-sm-4 col-form-label">Product Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="productName" id="productName"
+                                               placeholder="Enter Product Name" th:name="|product[0].productName|">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="qtyUnit" class="col-sm-4 col-form-label">Quantity</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="qtyUnit" id="qtyUnit"
+                                               placeholder="Enter Quantity" th:name="|product[0].qtyUnit|">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="unitPrice" class="col-sm-4 col-form-label">Price</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="unitPrice" id="unitPrice"
+                                               placeholder="Enter Price" th:name="|product[0].unitPrice|">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="unitStock" class="col-sm-4 col-form-label">Stock</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="unitStock" id="unitStock"
+                                               placeholder="Enter Stock" th:name="|product[0].unitStock|">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label for="unitsOrder" class="col-sm-4 col-form-label">Unit Order</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="unitsOrder" id="unitsOrder"
+                                               placeholder="Enter Order" th:name="|product[0].unitsOrder|">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="reorderLevel" class="col-sm-4 col-form-label">Re Order</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="reorderLevel" id="reorderLevel"
+                                               placeholder="Enter Stock" th:name="|product[0].reorderLevel|">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="discontinued" class="col-sm-4 col-form-label">Discount</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="discontinued" id="discontinued"
+                                               placeholder="Enter Order" th:name="|product[0].discontinued|">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- card body category -->
+
+            <!-- card footer -->
+            <div class="footer justify-content fa-pull-right">
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </form>
+</div>

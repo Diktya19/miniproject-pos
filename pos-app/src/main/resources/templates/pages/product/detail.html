@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Product-Title</title>
+</head>
+<body>
+<div class="row mb-2" layout:fragment="breadcrumb">
+    <div class="col-sm-6">
+        <h1 class="m-0 font-weight-bolder">Product</h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active font-weight-light">Product</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row" layout:fragment="content">
+    <!-- left column -->
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <!-- general form element -->
+        <div class="card card-pink">
+            <div class="card-header">
+                <h3 class="card-title font-weight-light">Detail Data Product</h3>
+            </div>
+
+            <!-- /.card header -->
+            <form th:action="@{/product/save}" method="post">
+                <!-- card form start -->
+                <input type="hidden" name="id" th:value="${listProduct.id}">
+
+                <div class="card-body bg-gradient-gray-dark">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" class="form-control" name="productName" id="productName" th:value="${listProduct.productName}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Qty Unit</label>
+                        <input type="text" class="form-control" name="qtyUnit" id="qtyUnit" th:value="${listProduct.qtyUnit}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit Price</label>
+                        <input type="text" class="form-control" name="unitPrice" id="unitPrice" th:value="${listProduct.unitPrice}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit Stock</label>
+                        <input type="text" class="form-control" name="unitStock" id="unitStock" th:value="${listProduct.unitStock}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Units Order</label>
+                        <input type="text" class="form-control" name="unitsOrder" id="unitsOrder" th:value="${listProduct.unitsOrder}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Reorder Level</label>
+                        <input type="text" class="form-control" name="reorderLevel" id="reorderLevel" th:value="${listProduct.reorderLevel}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Discontinued</label>
+                        <input type="text" class="form-control" name="discontinued" id="discontinued" th:value="${listProduct.discontinued}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supplier</label>
+                        <input type="text" class="form-control" name="supplierId" id="supplierId" th:value="${listProduct.supplier.companyName}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        <input type="text" class="form-control" name="categoryId" id="categoryId" th:value="${listProduct.category.categoryName}">
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="btn btn-outline-danger" th:href="@{~/product}">back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

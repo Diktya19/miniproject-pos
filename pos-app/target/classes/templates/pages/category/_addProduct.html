@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-6">
+    <div class="form-group row">
+      <label for="productName" class="col-sm-2 col-form-label">Product name</label>
+      <div class="col-sm-10">
+        <input type="text" name="productName" id="productName" class="form-control"
+        th:name="|product[${index}].productName|" placeholder="Product Name">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="supplierId" class="col-sm-2 col-form-label">Supplier Name</label>
+      <select class="form-control custom-select" id="supplierId" name="supplierId" th:name="|product[${index}].supplierId|">
+        <option value="">select one</option>
+        <option th:each="supplier: ${listSupplier}" th:value="${supplier.id}"
+                th:text="${supplier.companyName}"></option>
+      </select>
+    </div>
+    <div class="form-group row">
+      <label for="qtyUnit" class="col-sm-2 col-form-label">Quantity</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="qtyUnit" name="qtyUnit"
+        th:name="|product[${index}].qtyUnit|" placeholder="Quantity">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="unitPrice" class="col-sm-2 col-form-label">Price</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="unitPrice" name="unitPrice"
+        th:name="|product[${index}].unitPrice|" placeholder="Price">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="unitStock" class="col-cm-2 col-form-label">Stock</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="unitStock" name="unitStock"
+        th:name="|product[${index}].unitStock|" placeholder="Stock">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="unitsOrder" class="col-sm-2 col-form-label">Orders</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="unitsOrder" name="unitsOrder"
+        th:name="|product[${index}].unitsOrder|" placeholder="Orders">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="reorderLevel" class="col-sm-2 col-form-label">ReOrder</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="reorderLevel" name="reorderLevel"
+        th:name="|product[${index}].reorderLevel|" placeholder="Reorders">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="discontinued" class="col-sm-2 col-form-label">Discount</label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="discontinued" name="discontinued"
+      th:name="|produc[${index}].discontinued|" placeholder="Discount">
+      </div>
+    </div>
+  </div>
+</div>
